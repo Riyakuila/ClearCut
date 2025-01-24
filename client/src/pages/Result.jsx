@@ -21,7 +21,7 @@ const Result = () => {
                     <div className='flex flex-col'>
                        <p className='font-semibold text-gray-600 mb-2'>Background Removed</p>
                        <div className='rounded-md border border-gray-300 h-full relative bg-layer overflow-hidden'>
-                            {/*<img src={assets.image_wo_bg} alt="" />*/}
+                            <img src={assets.image_wo_bg} alt="" />
                             <div className='absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2'>
                             <div className='border-4 border-violet-600 rounded-full h-12 w-12 border-t-transparent animate-spin'>
 
