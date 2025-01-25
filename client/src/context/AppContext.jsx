@@ -1,13 +1,14 @@
 import { useAuth, useClerk, useUser } from "@clerk/clerk-react";
 import { createContext, useState } from "react";
-import axios from 'axios';
 import { toast } from "react-toastify";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+
 
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-    const [credit, setCredit] = useState(false);
+    const [credit, setCredit] = useState(0);
     const [image, setImage] = useState(false);
     const [resultImage, setResultImage] = useState(false);
     
@@ -41,6 +42,23 @@ const AppContextProvider = (props) => {
             setResultImage(false)
 
             navigate('/result')
+
+            const token = await getToken()
+            const formData = new FormData()
+            image && formData.append('image',image)
+
+            const {data} = await axios.post(backendUrl+'/api/image/remove-bg',formData,{headers:{token}})
+
+            if (data.success) {
+                setResultImage(data.resultImage)
+                data.creditBalance && setCredit(data.creditBalance)
+            } else{
+                toast.error(data.message)
+                data.creditBalance && setCredit(data.creditBalance)
+                if (data.creditBalance === 0) {
+                    navigate('/buy')
+                }
+            }
             
         } catch (error) {
             console.log(error)
@@ -54,7 +72,8 @@ const AppContextProvider = (props) => {
         setImage,
         loadCreditsData,
         backendUrl,
-        removeBg
+        removeBg,
+        resultImage,setResultImage,
     }
 
     return(

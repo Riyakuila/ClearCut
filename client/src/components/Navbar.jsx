@@ -15,7 +15,7 @@ const Navbar = () =>{
         if (isSignedIn) {
             loadCreditsData()
         }
-    },[isSignedIn])
+    },[isSignedIn, loadCreditsData])
     
 
     return(
