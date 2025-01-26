@@ -4,5 +4,10 @@
         "source": "/(.*)",
         "destination": "/"
       }
-    ]
+    ],
+    "static": {
+      "directory": "public",
+      "publicPath": "/"
+    }
   }
+  
