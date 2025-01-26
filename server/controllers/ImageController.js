@@ -1,4 +1,4 @@
-import axips from 'axios';
+import axios from 'axios';
 import fs from 'fs';
 import FormData from 'form-data';
 import userModel from '../models/userModel.js';
@@ -16,7 +16,7 @@ const removeBgImage = async(req,res) => {
             return res.json({success:false, message:'User not found'})
         }
         if (user.creditBalance === 0) {
-            return res.json({success:false, message:error.message})
+            return res.json({success:false, message:'No credit balance.', creditBalance:user.creditBalance})
         }
 
         const imagePath = req.file.path;
@@ -27,7 +27,7 @@ const removeBgImage = async(req,res) => {
         const formData = new FormData()
         formData.append('image_file',imageFile)
 
-        const {data} = await axios.post('https://clipdrop-api.co/cleanup/v1',formData,{
+        const {data} = await axios.post('https://clipdrop-api.co/remove-background/v1',formData,{
         headers:{
             'x-api-key': process.env.CLIPDROP_API,
         },
