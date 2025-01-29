@@ -1,11 +1,11 @@
 import React from 'react';
 import {Routes, Route } from 'react-router-dom';
-import Result from './pages/result';
 import BuyCredit from './pages/buyCredit';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import Home from './pages/Home';
+import Result from './pages/result';
 
 
 
